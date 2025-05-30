@@ -390,17 +390,3 @@ void readsensors() {
     heading = 0;
   }
 }
-
-double KALMAN(double U) {
-
-  // Update Kalman gain
-  kalmanGain = kalmanError*hValue/(hValue*kalmanError*hValue+noiseCovariance);
-  // Update estimate
-  filteredEstimate = filteredEstimate + kalmanGain*(U-hValue*filteredEstimate);
-
-  // Update Error Covariance
-  kalmanError = (1-kalmanGain*hValue)*kalmanError+rValue;
-
-  return filteredEstimate;
-
-}
